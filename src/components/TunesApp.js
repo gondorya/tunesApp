@@ -1,13 +1,11 @@
 import React from 'react';
+import GetTunes from './GetTunes';
 
 export default class TunesApp extends React.Component {
-    
   render() {
-    const hello = 'Hello World';
-
     return (
       <div>
-        {hello}
+      	<GetTunes />
       </div>
     );
   };
