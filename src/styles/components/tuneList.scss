@@ -1,0 +1,9 @@
+.tuneList {
+	&__item {
+		background: $static-color no-repeat center;
+		background-size: cover;
+		padding-top: 100%;
+		width: 100%;
+		margin: 15px 0;
+	}
+}

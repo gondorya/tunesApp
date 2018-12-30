@@ -20,13 +20,17 @@ export default class GetTunes extends React.Component {
   render() {
     const { tunes } = this.state;
     return (
-      <ul>
-        {tunes.map((tune) => 
-          <li key={tune.id.attributes['im:id']}>
-            {tune.title.label}
-          </li>
-        )}
-      </ul>
+      <div className="tuneList row">
+        {tunes.map((tune) => {
+          const pic = tune['im:image'][2].label.replace('170x170', '350x350');
+          console.log(tune);
+          return (
+            <div className="col col-12 col-md-6 col-lg-4" key={tune.id.attributes['im:id']}>
+              <div className="tuneList__item" style={{backgroundImage: `url(${pic})`}}></div>
+              {tune.title.label}
+            </div>
+        )})}
+      </div>
     );
   }
 };
