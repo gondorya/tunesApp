@@ -1,0 +1,49 @@
+.albumList {
+	&__image {
+		background: $static-color no-repeat center;
+		background-size: cover;
+		padding-top: 100%;
+		width: 100%;
+		margin: 15px 0;
+	}
+
+ 	&__content {
+ 		display: none;
+ 	}
+
+ 	&__item {
+		&.is-active {
+			padding: 30px;
+			width: 100vw;
+			height: 100vh;
+			max-width: none;
+			position: fixed;
+			background: $static-color;
+			left: 0;
+			z-index: 1;
+			color: $white;
+
+			.albumList__image {
+				width: 300px;
+				padding-top: 300px;
+				display: inline-block;
+				transform: scale(1,1) translateX(100vw);
+				position: relative;
+				animation: moveImage 5s 0.5s forwards;
+			}
+
+			.albumList__content {
+				display: block;
+			}
+		}
+ 	}
+}
+
+@keyframes moveImage {
+        0%   { transform: scale(1.1, 0.9) translateX(100vw);}
+        30%  { transform: scale(0.9,1.1) translateX(0);}
+        40%  { transform: scale(1.1,0.9)   translateX(0); }
+        50%  { transform: scale(0.95,1.05) translateX(0); }
+        57%  { transform: scale(1,1)      translateX(0); }
+        100% { transform: scale(1,1)      translateX(0); }
+    }
