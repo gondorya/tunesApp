@@ -25,6 +25,11 @@
 
  	&__item {
  		cursor: pointer;
+ 		transition: transform ease-out 0.3s;
+
+ 		&:not(.is-active):hover {
+ 			transform: scale(1.1);
+ 		}
 
  		&::before {
  			position: absolute;

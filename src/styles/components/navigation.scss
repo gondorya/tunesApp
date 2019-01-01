@@ -1,0 +1,13 @@
+.navigation {
+	display: none;
+	position: fixed;
+	z-index: 2;
+	width: 100%;
+	bottom: 20px;
+	left: 0;
+	text-align: center;
+
+	&.is-visible {
+		display: block;
+	}
+}

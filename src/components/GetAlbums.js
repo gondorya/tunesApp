@@ -1,5 +1,6 @@
 import React from 'react';
 import Album from './Album';
+import AlbumsNavigation from './AlbumsNavigation';
 
 const API = 'https://itunes.apple.com/us/rss/topalbums/limit=100/json';
 
@@ -16,7 +17,8 @@ export default class GetAlbums extends React.Component {
   componentDidMount() {
     fetch(API)
       .then(response => response.json())
-      .then(data => this.setState({ albums: data.feed.entry }));
+      .then(data => this.setState({ albums: data.feed.entry }))
+      .catch(error => console.error('Error:', error));
   }
 
   activateTile = (index) => {
@@ -37,7 +39,6 @@ export default class GetAlbums extends React.Component {
       <div className="albumList row">
         {albums.map((album, index) => {
           const pic = album['im:image'][2].label.replace('170x170', '350x350');
-          console.log(this.state.activeItem);
           return (
             <Album
               key={album.id.attributes['im:id']}
@@ -53,6 +54,14 @@ export default class GetAlbums extends React.Component {
               styles={{backgroundImage: `url(${pic})`}} 
               enterPress = {this.handleEnterPress}/>
         )})}
+
+        <AlbumsNavigation 
+          stateClass={this.state.activeItem > -1 ? 'is-visible' : ''}
+          prevStateClass={this.state.activeItem > 0 ? 'is-active' : ''}
+          nextStateClass={this.state.activeItem < 99 ? 'is-active' : ''}
+          currentIndex={this.state.activeItem}
+          showTile={(newIndex) => {this.activateTile(newIndex)}}
+        />
       </div>
     );
   }
