@@ -23,7 +23,13 @@ export default class GetAlbums extends React.Component {
     this.setState({
       activeItem: index,
     })
-  };
+  }
+
+  handleEnterPress = (e, action) => {
+    if (e.keyCode === '13') {
+      action;
+    }
+  }
 
   render() {
     const { albums } = this.state;
@@ -31,19 +37,21 @@ export default class GetAlbums extends React.Component {
       <div className="albumList row">
         {albums.map((album, index) => {
           const pic = album['im:image'][2].label.replace('170x170', '350x350');
-          console.log(album);
+          console.log(this.state.activeItem);
           return (
             <Album
               key={album.id.attributes['im:id']}
               stateClass={this.state.activeItem === index ? 'is-active' : ''}
-              activateTile={() => {this.activateTile(index)}}
-              index = {index + 1}
+              tabIndexValue={this.state.activeItem === -1 ? '1' : false}
+              activateTile={(newIndex) => {this.activateTile(newIndex)}}
+              index = {index}
               title={album['im:name'].label}
               artist={album['im:artist'].label}
               date={album['im:releaseDate'].attributes.label}
               category={album.category.attributes.label}
               link={album.link.attributes.href}
-              styles={{backgroundImage: `url(${pic})`}} />
+              styles={{backgroundImage: `url(${pic})`}} 
+              enterPress = {this.handleEnterPress}/>
         )})}
       </div>
     );

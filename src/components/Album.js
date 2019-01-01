@@ -1,7 +1,12 @@
 import React from 'react';
 
 const Album = (props) => (
-  <div className={`col col-12 col-md-6 col-lg-4 albumList__item ${props.stateClass}`} onClick={() => {props.activateTile()}} data-index={props.index}>
+  <div className={`col col-12 col-md-6 col-lg-4 albumList__item ${props.stateClass}`} 
+    onClick={() => {props.activateTile(props.index)}} 
+    onKeyPress={(e) => {props.enterPress(e, props.activateTile(props.index))}}
+    tabIndex={props.tabIndexValue}
+    data-index={props.index + 1}>
+    <button className="button button--close" onClick={(e) => {e.stopPropagation(); props.activateTile(-1)}}>close</button>
     <div className="albumList__image" style={props.styles}></div>
     <div className="albumList__content">
       <p><span className="albumList__label">Title:</span> {props.title}</p>
