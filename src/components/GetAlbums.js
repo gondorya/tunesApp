@@ -37,7 +37,12 @@ export default class GetAlbums extends React.Component {
               key={album.id.attributes['im:id']}
               stateClass={this.state.activeItem === index ? 'is-active' : ''}
               activateTile={() => {this.activateTile(index)}}
-              title={album.title.label}
+              index = {index + 1}
+              title={album['im:name'].label}
+              artist={album['im:artist'].label}
+              date={album['im:releaseDate'].attributes.label}
+              category={album.category.attributes.label}
+              link={album.link.attributes.href}
               styles={{backgroundImage: `url(${pic})`}} />
         )})}
       </div>
