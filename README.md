@@ -15,5 +15,6 @@ yarn install
 and 
 
 ```bash
+yarn run build
 yarn run serve
 ```
