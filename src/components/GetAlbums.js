@@ -3,6 +3,10 @@ import Album from './Album';
 import AlbumsNavigation from './AlbumsNavigation';
 
 const API = 'https://itunes.apple.com/us/rss/topalbums/limit=100/json';
+const CLASSES = {
+  isActive: 'is-active',
+  isVisible: 'is-visible',
+}
 
 export default class GetAlbums extends React.Component {
   constructor(props) {
@@ -27,8 +31,8 @@ export default class GetAlbums extends React.Component {
     })
   }
 
-  handleEnterPress = (e, action) => {
-    if (e.keyCode === '13') {
+  handleKeyPress = (e, keyCode, action) => {
+    if (e.keyCode === keyCode) {
       action;
     }
   }
@@ -42,9 +46,9 @@ export default class GetAlbums extends React.Component {
           return (
             <Album
               key={album.id.attributes['im:id']}
-              stateClass={this.state.activeItem === index ? 'is-active' : ''}
+              stateClass={this.state.activeItem === index ? CLASSES.isActive : ''}
               tabIndexValue={this.state.activeItem === -1 ? '1' : false}
-              activateTile={(newIndex) => {this.activateTile(newIndex)}}
+              activateTile={this.activateTile}
               index = {index}
               title={album['im:name'].label}
               artist={album['im:artist'].label}
@@ -52,13 +56,13 @@ export default class GetAlbums extends React.Component {
               category={album.category.attributes.label}
               link={album.link.attributes.href}
               styles={{backgroundImage: `url(${pic})`}} 
-              enterPress = {this.handleEnterPress}/>
+              keyPress = {this.handleKeyPress}/>
         )})}
 
         <AlbumsNavigation 
-          stateClass={this.state.activeItem > -1 ? 'is-visible' : ''}
-          prevStateClass={this.state.activeItem > 0 ? 'is-active' : ''}
-          nextStateClass={this.state.activeItem < 99 ? 'is-active' : ''}
+          stateClass={this.state.activeItem > -1 ? CLASSES.isVisible : ''}
+          prevStateClass={this.state.activeItem > 0 ? CLASSES.isActive : ''}
+          nextStateClass={this.state.activeItem < 99 ? CLASSES.isActive : ''}
           currentIndex={this.state.activeItem}
           showTile={(newIndex) => {this.activateTile(newIndex)}}
         />
