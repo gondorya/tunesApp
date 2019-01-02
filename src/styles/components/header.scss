@@ -1,9 +1,21 @@
 .header {
 	padding: 20px;
 
+	@include respond-to(mobile) {
+		padding-bottom: 0;
+	}
+
 	&__title {
 		text-align: center;
 		font-weight: 100;
 		font-size: 60px;
+
+		@include respond-to(tablet) {
+			font-size: 50px;
+		}
+
+		@include respond-to(mobile) {
+			font-size: 30px;
+		}
 	}
 }
